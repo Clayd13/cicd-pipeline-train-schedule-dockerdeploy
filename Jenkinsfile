@@ -14,7 +14,7 @@ pipeline {
             }
             steps {
                 script {
-                    dockerImage = docker.build("clayd13/train-schedule")
+                    dockerImage = docker.build("clayd13/repo1")
                     dockerImage.inside {
                         sh 'echo $(curl localhost:8080)'
                     }
@@ -27,7 +27,7 @@ pipeline {
             }
             steps {
                 script {
-                    docker.withRegistry('https://hub.docker.com/repository/docker/clayd13/repo1', "docker_hub_login") {
+                    docker.withRegistry('', 'docker_hub_login') {
                         dockerImage.push("${env.BUILD_NUMBER}")
                         dockerImage.push("latest")
                     }
